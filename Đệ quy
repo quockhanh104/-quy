@@ -1,0 +1,34 @@
+class Program
+	{
+		public static int LenString(string s, int len)
+		{
+			if (s[1].ToString() != " ")
+			{
+				return LenString(s.Remove(1, 1), len + 1);
+			}
+			else
+			{
+				return len + 1;
+			}
+		}
+		public static int SumString(string str, int sum, int len)
+		{
+			//Find out if exitsing 2 white space adjacent
+			if (str.Contains("  ") == true)
+				return SumString(str.Remove(str.IndexOf("  "), 1), sum, 0);
+			if (str.Length > 1)
+				if (str[1].ToString() != " ")
+				{
+					if ((len = LenString(str, 0)) == 2)
+						return SumString(str.Remove(0, len + 1), sum + 1, 0);
+					return SumString(str.Remove(0, len + 1), sum, 0);
+				}
+			return sum;
+		}
+		static void Main(string[] args)
+		{
+			string str = "   Chao   mung   cac   em   den   voi   Ha   Noi   ";
+			Console.Write("Result=" + SumString(str.Insert(0, " "), 0, 0));
+			Console.ReadKey();
+		}   
+	}
